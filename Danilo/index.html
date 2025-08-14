@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Nombre del juego</title>
+
+    <style>
+        body{
+            background-image: url(../imagenes/fondo.PNG);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <div class="flex pt-10"> 
+    <h1 class="text-3xl font-bold mb-7 mr-100 ml-123 text-white">Juego de Decisiones</h1>
+    <p class="text-white">Puntaje: <span id="puntaje">0</span></p>
+    </div>
+
+    <p id="pregunta" class="pt- text-xl flex justify-center mb-15 text-white px-50"></p>
+
+    <div class="flex pt- justify-center">        
+    <div class="flex flex-col mt-" id="opciones" ></div>    
+    </div>
+
+    <div id="reinicio" ></div>
+
+    
+
+    <script>
+        const preguntas = [
+            {
+                texto: "Uno de los caminos está lleno de una niebla brillante, el otro es oscuro. ¿Qué camino eliges?",
+                opciones: [
+                    { texto: " El de la niebla", puntos: 10 },
+                    { texto: "El oscuro", puntos: 0 },
+                    { texto: "Te quedas en la bifurcacion", puntos: -5 },
+                    { texto: "Vuelves a donde te estrellaste", puntos: -10 }
+                ]
+            },
+            {
+                texto: "Encuentras un robot que te ofrece ayuda para volver a la superficie, pero a cambio debes prometerle tu lealtad. ¿Qué haces?",
+                opciones: [
+                    { texto: "Aceptas", puntos: 10 },
+                    { texto: "Te niegas", puntos: -5 },
+                    { texto: "Aceptas, pero secretamente planeas engañarlo", puntos: 0 },
+                    { texto: "Le preguntas si es bueno o malo", puntos: -10 }
+                ]
+            },
+            {
+                texto: "Si aceptas, te lleva a un lugar donde hay una consola de videojuegos. Te dice que para volver, debes jugar. ¿Qué haces?",
+                opciones: [
+                    { texto: "Juegas para ganar", puntos: 10 },
+                    { texto: "Juegas para perder", puntos: -5 },
+                    { texto: "Intentas hacer trampa", puntos: -10 },
+                    { texto: "No juegas", puntos: 0 }
+                ]
+            },
+            {
+                texto: "Si ganas, te da una llave. Te dice que si la usas, el robot perderá su poder. ¿Qué haces?",
+                opciones: [
+                    { texto: "Usas la llave", puntos: 10 },
+                    { texto: "Le das la llave", puntos: -5 },
+                    { texto: "Te quedas con la llave", puntos: 0 },
+                    { texto: "No usas la llave", puntos: -10 }
+                ]
+            },
+            {
+                texto: "Si usas la llave, un portal se abre. Al salir, estás de vuelta en la ciudad, pero un grupo de personas te dice que el robot era la clave para salvar a la ciudad. ¿Qué haces?",
+                opciones: [
+                    { texto: "Les dices la verdad", puntos: 10 },
+                    { texto: "Les mientes", puntos: -5 },
+                    { texto: "Te quedas en la ciudad para ayudar", puntos: 0 },
+                    { texto: "Te vas", puntos: -10 }
+                ]
+            },
+        ];
+
+        let puntaje = 0;
+        let indicePregunta = 0;
+
+        function mostrarPregunta() {
+            document.getElementById("reinicio").innerHTML = ""; 
+            if (indicePregunta < preguntas.length) {
+                const pregunta = preguntas[indicePregunta];
+                document.getElementById("pregunta").textContent = pregunta.texto;
+                
+                const opcionesDiv = document.getElementById("opciones");
+                opcionesDiv.innerHTML = "";
+
+                pregunta.opciones.forEach(opcion => {
+                    const boton = document.createElement("button");
+                    boton.textContent = opcion.texto;
+                    boton.className = "p-2 border-4 border-blue-500  mx- rounded my-2 bg-neutral-200"
+                    boton.onclick = () => {
+                        puntaje += opcion.puntos;
+                        document.getElementById("puntaje").textContent = puntaje;
+                        indicePregunta++;
+                        mostrarPregunta();
+                    };
+                    opcionesDiv.appendChild(boton);
+                });
+            } else {
+                mostrarResultado();
+            }
+        }
+
+        function mostrarResultado() {
+            document.getElementById("pregunta").textContent = "Juego terminado";
+            document.getElementById("opciones").innerHTML = "";
+
+            if (puntaje >= 45) {
+                document.getElementById("pregunta").textContent += "  Ganaste!!";
+            } else {
+                document.getElementById("pregunta").textContent += "  Perdiste.";
+            }
+
+            const botonReinicio = document.createElement("button");
+            botonReinicio.className = "p-2 border mx-2 rounded my-5 bg-neutral-200"
+            botonReinicio.textContent = "Volver a jugar";
+            botonReinicio.onclick = reiniciarJuego;
+            document.getElementById("reinicio").appendChild(botonReinicio);
+        }
+
+        function reiniciarJuego() {
+            puntaje = 0;
+            indicePregunta = 0;
+            document.getElementById("puntaje").textContent = puntaje;
+            mostrarPregunta();
+        }
+
+        mostrarPregunta();
+    </script>
+
+</body>
+</html>
