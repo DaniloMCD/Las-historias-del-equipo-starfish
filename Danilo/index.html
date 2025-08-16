@@ -21,7 +21,7 @@
     <p class="text-white">Puntaje: <span id="puntaje">0</span></p>
     </div>
 
-    <p id="pregunta" class="pt- text-xl flex justify-center mb-15 text-white px-50"></p>
+    <p id="pregunta" class="pt- text-xl flex justify-center mb-15 text-red-500 px-50"></p>
 
     <div class="flex pt- justify-center">        
     <div class="flex flex-col mt-" id="opciones" ></div>    
@@ -34,7 +34,7 @@
     <script>
          const preguntas = [
             {
-                texto: "Avanzas por el túnel y llegas a una bifurcación. Uno de los caminos está lleno de una niebla brillante, el otro es oscuro. ¿Qué camino eliges?",
+                texto: "Avanzas por el túnel y llegas a una bifurcación. Uno de los caminos está lleno de una niebla brillante, el otro es oscuro.   ------------------------------- ¿Qué camino eliges?",
                 opciones: [
                     { texto: "El de la niebla", puntos: 10 },
                     { texto: "El oscuro", puntos: 0 },
@@ -43,7 +43,7 @@
                 ]
             },
             {
-                texto: "Más adelante, encuentras un robot que te ofrece ayuda para volver a la superficie. Sin embargo, te pide que le prometas lealtad a cambio. ¿Qué haces?",
+                texto: "Más adelante, encuentras un robot que te ofrece ayuda para volver a la superficie. Sin embargo, te pide que le prometas lealtad a cambio.------------------------------ ¿Qué haces?",
                 opciones: [
                     { texto: "Aceptas sin dudarlo", puntos: 5 },
                     { texto: "Te niegas aunque te siga", puntos: 0 },
@@ -125,7 +125,7 @@
                 reinicioDiv.appendChild(botonRedirect);
                     
             } else {
-                document.getElementById("pregunta").textContent += "  Perdiste.";
+                document.getElementById("pregunta").textContent += "  Perdiste...";
             }
 
             const botonReinicio = document.createElement("button");
