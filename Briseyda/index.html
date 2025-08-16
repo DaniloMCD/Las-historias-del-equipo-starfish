@@ -98,7 +98,7 @@
                 pregunta.opciones.forEach(opcion => {
                     const boton = document.createElement("button");
                     boton.textContent = opcion.texto;
-                    boton.className = "p-2 border-4 border-blue-500  mx- rounded my-2 bg-neutral-200"
+                    boton.className = "p-2 border-4 border-blue-500  mx- rounded my-2 bg-neutral-200 duration-300 ease-in-out hover:scale-120"
                     boton.onclick = () => {
                         puntaje += opcion.puntos;
                         document.getElementById("puntaje").textContent = puntaje;
@@ -118,12 +118,12 @@
 
             const reinicioDiv = document.getElementById("reinicio");
 
-            if (puntaje >= 45) {
+            if (puntaje >= 40) {
                 document.getElementById("pregunta").textContent += "  Ganaste!!";
 
                 const botonRedirect = document.createElement("button");
                 botonRedirect.textContent = "Elegir otro personaje";
-                botonRedirect.className = "bg-neutral-200 border-4 border-red-500 p-2 my-2 mr-3 rounded shadow-md transition duration-200";
+                botonRedirect.className = "bg-neutral-200 border-4 border-red-500 p-2 my-2 mr-3 rounded shadow-md duration-300 ease-in-out hover:scale-120";
                 botonRedirect.onclick = () => {
                   
                     window.location.href = "../eleccion de personaje.html";
@@ -136,7 +136,7 @@
             }
 
             const botonReinicio = document.createElement("button");
-            botonReinicio.className = "p-2 border-4 border-blue-500  mx- rounded my-2 bg-neutral-200 shadow-md transition duration-200"
+            botonReinicio.className = "p-2 border-4 border-blue-500  mx- rounded my-2 bg-neutral-200 shadow-md duration-300 ease-in-out hover:scale-120"
             botonReinicio.textContent = "Volver a jugar";
             botonReinicio.onclick = reiniciarJuego;
             reinicioDiv.appendChild(botonReinicio);
